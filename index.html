@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La Colina de los Susurros · Halloween</title>
+<title>La Colina de los   Susurros · Halloween</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Creepster&family=IM+Fell+DW+Pica:ital@0;1&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
@@ -306,7 +306,6 @@ const cur_=[
 ["🥔","Nabos, no calabazas","En Irlanda las primeras linternas se tallaban en nabos. Al llegar a América, los inmigrantes descubrieron que las calabazas eran más grandes y fáciles de tallar."],
 ["🍬","Dulce o truco","Viene de una costumbre medieval: los niños pedían “pasteles de alma” de casa en casa y rezaban por los difuntos a cambio."],
 ["🦇","Más de 1400 especies","Hay más de 1400 especies de murciélagos en el mundo. Son los únicos mamíferos que realmente vuelan y cuidan las cosechas comiendo insectos."],
-["🐈‍⬛","Gatos negros","En la Edad Media se los asociaba con brujas, pero en otras culturas, como la japonesa, se los considera símbolo de buena suerte."],
 ["🎬","El mundo de Burton","Tim Burton nació en Burbank en 1958. Dibujaba monstruos desde niño, y su estilo mezcla el expresionismo alemán, el cine de terror clásico y los libros de Dr. Seuss."]];
 document.getElementById("cur").innerHTML=cur_.map(x=>`<button class="flip" aria-pressed="false"><div><span class="f"><i>${x[0]}</i>${x[1]}</span><span class="b">${x[2]}</span></div></button>`).join("");
 document.querySelectorAll(".flip").forEach(b=>b.onclick=()=>{b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true");sfx.creak()});
