@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La Colina de los   Susurros · Halloween</title>
+<title>La Colina de los Susurros · Halloween</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Creepster&family=IM+Fell+DW+Pica:ital@0;1&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
 <style>
 /* ===== 1. VARIABLES DE COLOR Y TIPOGRAFÍA ===== */
 :root{
   --ink:#0d0b14; --bone:#ebe5d2; --pumpkin:#e8731a; --violet:#4a3470; --mist:#8fb5ab;
-  --titulo:"Creepster","Impact",fantasy; --texto:"IM Fell DW Pica","Georgia",serif; --gotico:"UnifrakturCook","Creepster",fantasy;
+  --titulo:"Creepster","Impact",fantasy; --texto:"IM Fell English","Georgia",serif;
 }
 /* ===== 2. CURSORES PERSONALIZADOS (SVG incrustados) ===== */
 html{scroll-behavior:smooth;
@@ -63,24 +63,12 @@ nav a:hover,nav a:focus-visible{color:var(--pumpkin);outline:none;text-decoratio
 #dark{position:relative;height:300px;overflow:hidden;background:#17121f;border:3px solid var(--bone);touch-action:none}
 .item{position:absolute;font-size:2.2rem;background:none;border:0;padding:0;filter:grayscale(.4)}
 .item.found{filter:drop-shadow(0 0 10px var(--pumpkin))}
-#veil{position:absolute;inset:0;pointer-events:none;--x:50%;--y:50%;background:radial-gradient(circle var(--r,60px) at var(--x) var(--y),transparent 0,transparent 45%,#05040a 100%)}
+#veil{position:absolute;inset:0;pointer-events:none;--x:50%;--y:50%;background:radial-gradient(circle 95px at var(--x) var(--y),transparent 0,transparent 55%,#05040a 100%)}
 svg.pk{width:100%;max-width:260px;display:block;margin:0 auto}
 #oracle{min-height:5rem;font-style:italic;color:var(--bone)}
 .ghost{position:fixed;pointer-events:none;z-index:50;width:44px;animation:up 1.8s ease-out forwards}
 @keyframes up{to{transform:translateY(-140px) rotate(14deg);opacity:0}}
 footer{text-align:center;padding:3rem 1rem;color:var(--mist)}
-/* ===== ESTÉTICA DE LIBRO ANTIGUO ===== */
-body{color:#e6d8b4}
-.panel{background:#130b0cde;box-shadow:inset 0 0 70px #000;color:#e6d8b4}
-.panel p{text-align:justify;hyphens:auto;text-shadow:0 0 1px #e6d8b455}
-#story-text::first-letter,#leg-text::first-letter{font-family:var(--gotico);font-size:3.6rem;float:left;line-height:.8;color:var(--pumpkin);padding:.08em .1em 0 0}
-.tabs button{font-family:var(--gotico);font-size:1.2rem}
-h2::after{content:"";display:block;height:12px;margin-top:.3rem;max-width:280px;background:repeating-linear-gradient(135deg,var(--bone) 0 8px,var(--ink) 8px 16px)}
-#count button{font:1rem var(--texto);background:var(--violet);color:var(--bone);border:2px solid var(--bone);padding:.2rem .8rem;margin-left:.5rem}
-svg.pk.lit{filter:drop-shadow(0 0 18px #e8731a88)}
-svg.pk.scare{animation:shake .12s 5}
-svg.pk.scare #pupils circle{r:14}
-@keyframes shake{0%,100%{transform:translate(0)}25%{transform:translate(-6px,3px) rotate(-2deg)}75%{transform:translate(6px,-3px) rotate(2deg)}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -89,7 +77,7 @@ svg.pk.scare #pupils circle{r:14}
 
 <nav>
   <a href="#historias">Historias</a><a href="#curiosidades">Curiosidades</a>
-  <a href="#leyendas">Leyendas</a><a href="#juegos">Juegos</a><a href="dulce-o-truco.html">Dulce o truco</a>
+  <a href="#leyendas">Leyendas</a><a href="#juegos">Juegos</a>
   <button id="snd" aria-pressed="false">🔇 Sonido: apagado</button>
 </nav>
 
@@ -102,7 +90,10 @@ svg.pk.scare #pupils circle{r:14}
 <section id="historias">
   <h2>Historias para no dormir (del todo)</h2>
   <div class="panel">
-    <div class="tabs" id="st-tabs" role="tablist"></div>
+    <div class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-s="A">El niño que coleccionaba sombras</button>
+      <button role="tab" aria-selected="false" data-s="B">Madame Marfil y el té de medianoche</button>
+    </div>
     <p id="story-text" aria-live="polite"></p>
     <div class="opts" id="story-opts"></div>
   </div>
@@ -128,23 +119,20 @@ svg.pk.scare #pupils circle{r:14}
   <div class="games">
     <div class="panel">
       <h3>La linterna</h3>
-      <p>Tienes 60 segundos para encontrar a los 9 habitantes. Se mueven, tu luz se achica y a veces se apaga.</p>
+      <p>Mueve la luz y encuentra a los 6 habitantes de la oscuridad. Tócalos para despertarlos.</p>
       <div id="dark"><div id="veil"></div></div>
-      <p id="count"></p>
+      <p id="count">Encontrados: 0 / 6</p>
     </div>
     <div class="panel">
       <h3>Talla tu calabaza</h3>
-      <svg class="pk" viewBox="0 0 200 200" role="img" aria-label="Calabaza tallada aterradora">
-        <defs><clipPath id="ec"><path id="pk-eyes2"/></clipPath><radialGradient id="sk" cx="50%" cy="40%" r="65%"><stop offset="0" stop-color="#e0661a"/><stop offset="1" stop-color="#6e2a04"/></radialGradient></defs>
-        <path d="M96 40C92 24 100 12 116 8C112 18 120 22 112 40Z" fill="#2f3b22"/>
-        <ellipse cx="52" cy="110" rx="46" ry="66" fill="#8f3a08"/><ellipse cx="148" cy="110" rx="46" ry="66" fill="#8f3a08"/>
-        <ellipse cx="100" cy="108" rx="54" ry="70" fill="url(#sk)"/>
-        <path d="M100 40Q82 108 100 178M70 48Q44 108 74 172M130 48Q156 108 126 172M150 62l8 14-6 8M54 150l-10 12 8 8" stroke="#4a1c03" stroke-width="2" fill="none" opacity=".75"/>
-        <path id="pk-eyes"/><path id="pk-mouth"/>
-        <g id="pupils" clip-path="url(#ec)"><circle cx="64" cy="76" r="10" fill="#ff2a1a"/><circle cx="136" cy="76" r="10" fill="#ff2a1a"/></g>
+      <svg class="pk" viewBox="0 0 200 200" role="img" aria-label="Calabaza tallada">
+        <path d="M100 38 C98 22 106 14 118 10 C112 22 112 30 108 38Z" fill="#3c5a3a"/>
+        <ellipse cx="55" cy="108" rx="48" ry="68" fill="#c85e10"/><ellipse cx="145" cy="108" rx="48" ry="68" fill="#c85e10"/>
+        <ellipse cx="100" cy="108" rx="52" ry="70" fill="#e8731a"/>
+        <path id="pk-eyes" fill="#2b1a08"/><path id="pk-mouth" fill="#2b1a08"/>
       </svg>
       <div class="opts">
-        <button id="b-eyes">Ojos</button><button id="b-mouth">Boca</button><button id="b-light">Vela</button><button id="b-scare">Aterrar</button>
+        <button id="b-eyes">Ojos</button><button id="b-mouth">Boca</button><button id="b-light">Vela</button>
       </div>
     </div>
     <div class="panel">
@@ -180,7 +168,6 @@ const sfx={
   creak:()=>{tone(70,.8,"sawtooth",.05,140);tone(95,.8,"square",.02,55)},
   bell:()=>{tone(523,1.8,"sine",.08);tone(1046,1.4,"sine",.03);tone(785,1.6,"sine",.03)},
   boo:()=>tone(220,.7,"sawtooth",.06,60),
-  scream:()=>{tone(900,.7,"sawtooth",.08,200);tone(1250,.7,"square",.04,300)},
   thunder:()=>{if(!on)return;const a=ac(),s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain();
     s.buffer=noise(3,true);f.type="lowpass";f.frequency.value=260;g.gain.value=.9;s.connect(f).connect(g).connect(a.destination);s.start()}
 };
@@ -207,15 +194,9 @@ function build(){
   s.fillStyle=sky;s.fillRect(0,0,W,H);
   stars=[];for(let i=0;i<90;i++){const st={x:rnd()*W,y:rnd()*H*.6,r:rnd()*1.4+.3,p:rnd()*6};stars.push(st);s.fillStyle="#ebe5d2aa";s.fillRect(st.x,st.y,st.r,st.r)}
   // luna con halo y cráteres
-  const mx=W*.3,my=H*.27,mr=105*U,gl=s.createRadialGradient(mx,my,mr*.8,mx,my,mr*3);gl.addColorStop(0,"#ebe5d255");gl.addColorStop(1,"#ebe5d200");
+  const mx=W*.24,my=H*.22,mr=58*U,gl=s.createRadialGradient(mx,my,mr*.8,mx,my,mr*3);gl.addColorStop(0,"#ebe5d255");gl.addColorStop(1,"#ebe5d200");
   s.fillStyle=gl;s.fillRect(0,0,W,H);s.fillStyle="#ebe5d2";s.beginPath();s.arc(mx,my,mr,0,7);s.fill();
   s.fillStyle="#cfc7ae";[[-.3,-.2,.18],[.25,.1,.25],[-.1,.4,.12]].forEach(q=>{s.beginPath();s.arc(mx+q[0]*mr,my+q[1]*mr,q[2]*mr,0,7);s.fill()});
-  // colina espiral: cono curvo con franja blanca que da vueltas
-  const cx=W*.3,bw=W*.2,base=gy(cx)+20,py=H*.4,hh=base-py;
-  s.fillStyle="#0b0912";s.beginPath();s.moveTo(cx-bw,base);s.quadraticCurveTo(cx-bw*.3,base-hh*.25,cx,py);s.quadraticCurveTo(cx+bw*.3,base-hh*.25,cx+bw,base);s.fill();
-  s.strokeStyle="#ebe5d2";s.lineWidth=3*U;s.lineCap="round";s.beginPath();
-  for(let t=0,first=true;t<=1;t+=.004){const r=bw*Math.pow(1-t,1.6)*.8,a=t*Math.PI*2*3.2,y=base-hh*t+Math.sin(a)*r*.12;
-    if(Math.sin(a)<0){first=true;continue}s[first?"moveTo":"lineTo"](cx+Math.cos(a)*r,y);first=false}s.stroke();
   // colina
   s.fillStyle="#0b0912";s.beginPath();s.moveTo(0,H);for(let x=0;x<=W;x+=8)s.lineTo(x,gy(x));s.lineTo(W,H);s.fill();
   // casa embrujada torcida
@@ -227,7 +208,7 @@ function build(){
   s.strokeStyle="#0b0912";s.lineCap="round";
   (function br(x,y,l,a,w,d){if(d==0)return;const x2=x+Math.cos(a)*l,y2=y+Math.sin(a)*l;s.lineWidth=w;s.beginPath();s.moveTo(x,y);
     s.quadraticCurveTo(x+Math.cos(a+(rnd()-.5)*1.4)*l*.6,y+Math.sin(a+(rnd()-.5)*1.4)*l*.6,x2,y2);s.stroke();
-    const n=rnd()>.65?3:2;for(let i=0;i<n;i++)br(x2,y2,l*(.7+rnd()*.14),a+(rnd()-.5)*1.7,w*.7,d-1)})(W*.3,py+6,40*U,-Math.PI/2,7*U,7);
+    const n=rnd()>.65?3:2;for(let i=0;i<n;i++)br(x2,y2,l*(.7+rnd()*.14),a+(rnd()-.5)*1.7,w*.7,d-1)})(W*.13,gy(W*.13)+10,78*U,-Math.PI/2,13*U,8);
   // lápidas torcidas
   s.fillStyle="#0b0912";for(let i=0;i<16;i++){const x=rnd()*W,y=gy(x)+10+rnd()*30,w=(14+rnd()*12)*U,h=(22+rnd()*22)*U;
     s.save();s.translate(x,y);s.rotate((rnd()-.5)*.5);s.beginPath();s.moveTo(-w/2,0);s.lineTo(-w/2,-h);s.arc(0,-h,w/2,Math.PI,0);s.lineTo(w/2,0);s.fill();s.restore()}
@@ -271,23 +252,6 @@ B:{s:["Madame Marfil, una fantasma de rayas blancas y negras, ofrece un té cada
  b2:["Las cenizas formaron una frase: “Qué pena, hubiéramos sido buenos amigos”. Desde entonces, cada medianoche, algo suspira bajo tu ventana.","Final: El suspiro"],
  b3:["Sabía a menta y a recuerdo. Viste todas las fiestas de Halloween que alguna vez se celebraron y descubriste que tú estabas en todas.","Final: El invitado eterno"],
  b4:["Sabía a lluvia. Te volviste transparente de la risa y Madame Marfil te enseñó a atravesar paredes. Tu primera visita: la cocina de tu abuela.","Final: El fantasma travieso"]}};
-const T={A:"El niño que coleccionaba sombras",B:"Madame Marfil y el té de medianoche",C:"Jack el de la linterna",D:"El jinete sin cabeza",E:"El corazón delator",F:"La pata de mono"};
-stories.C={s:["Jack era el mayor tramposo de Irlanda. Una noche de otoño se topó con el diablo en el camino y, como no tenía ni una moneda, le propuso un trato: que se convirtiera en moneda para pagar unas copas.",[["Guardar la moneda junto a una cruz de plata","c1"],["Brindar y planear otra trampa","c2"]]],
- c1:["El diablo quedó atrapado en el bolsillo. Solo lo soltó a cambio de diez años de paz y de una promesa: nunca reclamaría el alma de Jack.",[["Seguir engañando a todos","c3"],["Arrepentirse a tiempo","c4"]]],
- c2:["El diablo pagó la ronda y Jack, ya borracho de orgullo, lo hizo trepar a un árbol y grabó una cruz en el tronco. El diablo juró no cobrarle jamás.",[["Seguir engañando a todos","c3"],["Arrepentirse a tiempo","c4"]]],
- c3:["Cuando Jack murió, el cielo no lo quiso por tramposo y el infierno no pudo cobrarlo por la promesa. «Vuelve a la oscuridad», dijo el diablo, y le arrojó un carbón ardiente. Jack lo guardó en un nabo hueco y desde entonces vaga iluminando su condena.","Final: Jack el de la linterna"],
- c4:["Jack murió más humilde, pero ya era tarde para el cielo. Aun así, en los caminos de Irlanda se ve una lucecita que sigue de lejos a los viajeros perdidos, para que no se pierdan como él.","Final: La linterna que perdona"]};
-stories.D={s:["Dicen que en el valle de Sleepy Hollow cabalga cada noche un soldado que perdió la cabeza en una guerra y la busca sin descanso. Un maestro de escuela, flaco y supersticioso, vuelve a casa por el camino del puente cuando oye cascos detrás.",[["Espolear el caballo","d1"],["Detenerte a mirar","d2"]]],
- d1:["Galopas hasta el puente, la única frontera que el jinete no puede cruzar. Ya a salvo, algo redondo y pesado vuela por el aire y te golpea: una calabaza. Nadie volvió a verte en el pueblo, pero el jinete se rio hasta el amanecer.","Final: La calabaza del puente"],
- d2:["El jinete se detuvo a tu lado, inclinó el cuerpo en silencio y te ofreció su cabeza envuelta en un paño: una calabaza tallada. Desde esa noche, todos te llaman el maestro que le habló al jinete.","Final: El pacto del puente"]};
-stories.E={s:["Vivías con un anciano de ojo pálido, como el de un buitre. No lo odiabas, pero ese ojo te helaba la sangre. Una noche, decidiste que debía desaparecer. Ahora, bajo las tablas del suelo, oyes un latido sordo que no cesa.",[["Confesar a la policía","e1"],["Fingir tranquilidad","e2"]]],
- e1:["Confesaste antes de que preguntaran. Los oficiales no oían nada, pero tú seguías jurando que el latido salía de las tablas. Nunca dejaste de oírlo.","Final: El latido que nunca calla"],
- e2:["Sonreíste y serviste té a los oficiales. Pero el latido crecía, y crecía, hasta que gritaste: «¡Levanten las tablas!». Los fantasmas no necesitan pruebas.","Final: Las tablas que hablan"]};
-stories.F={s:["Un viejo amigo trae a la familia White una pata de mono disecada: cada dedo concede un deseo, pero cobra un precio terrible. El señor White, riendo, pide doscientas libras.",[["Pedir un segundo deseo","f1"],["Quemar la pata en la chimenea","f2"]]],
- f1:["Al día siguiente llegaron las doscientas libras, como indemnización por la muerte de su hijo en la fábrica. Desesperado, el padre pidió que volviera. Esa noche golpearon la puerta con paso lento y arrastrado.",[["Abrir la puerta","f3"],["Usar el último deseo","f4"]]],
- f2:["La pata ardió con un chisporroteo que sonó a risa. El dinero nunca llegó, pero la casa recobró la paz. A veces, lo mejor que se puede desear es no desear.","Final: La paz sin deseos"],
- f3:["Abriste de golpe. Solo había viento y una calle vacía… y sobre la mesa, la pata de mono, con un dedo menos.","Final: Un dedo menos"],
- f4:["Pediste el último deseo sin abrir. Los golpes cesaron de golpe. Esa noche comprendieron que algunas puertas es mejor dejarlas cerradas.","Final: La puerta cerrada"]};
 const stx=document.getElementById("story-text"),sop=document.getElementById("story-opts");let cur="A",typer;
 function show(node){clearInterval(typer);sop.innerHTML="";stx.textContent="";let i=0;sfx.creak();
   typer=setInterval(()=>{stx.textContent=node[0].slice(0,++i);if(i>=node[0].length){clearInterval(typer);options(node)}},22)}
@@ -295,9 +259,7 @@ function options(node){const o=node[1];
   if(typeof o==="string"){stx.insertAdjacentHTML("beforeend",`<br><span class="fin">${o}</span>`);mk("Volver a empezar",()=>show(stories[cur].s));sfx.bell()}
   else o.forEach(([l,n])=>mk(l,()=>show(stories[cur][n])))}
 function mk(l,fn){const b=document.createElement("button");b.textContent=l;b.onclick=fn;sop.appendChild(b)}
-const stt=document.getElementById("st-tabs");
-Object.keys(T).forEach(k=>{const b=document.createElement("button");b.textContent=T[k];b.setAttribute("role","tab");b.setAttribute("aria-selected",k==="A");
-  b.onclick=()=>{[...stt.children].forEach(x=>x.setAttribute("aria-selected",x===b));cur=k;show(stories[k].s)};stt.appendChild(b)});
+document.querySelectorAll("[data-s]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-s]").forEach(x=>x.setAttribute("aria-selected",x===b));cur=b.dataset.s;show(stories[cur].s)});
 show(stories.A.s);
 
 /* ===== F. CURIOSIDADES (tarjetas) ===== */
@@ -306,6 +268,7 @@ const cur_=[
 ["🥔","Nabos, no calabazas","En Irlanda las primeras linternas se tallaban en nabos. Al llegar a América, los inmigrantes descubrieron que las calabazas eran más grandes y fáciles de tallar."],
 ["🍬","Dulce o truco","Viene de una costumbre medieval: los niños pedían “pasteles de alma” de casa en casa y rezaban por los difuntos a cambio."],
 ["🦇","Más de 1400 especies","Hay más de 1400 especies de murciélagos en el mundo. Son los únicos mamíferos que realmente vuelan y cuidan las cosechas comiendo insectos."],
+["🐈‍⬛","Gatos negros","En la Edad Media se los asociaba con brujas, pero en otras culturas, como la japonesa, se los considera símbolo de buena suerte."],
 ["🎬","El mundo de Burton","Tim Burton nació en Burbank en 1958. Dibujaba monstruos desde niño, y su estilo mezcla el expresionismo alemán, el cine de terror clásico y los libros de Dr. Seuss."]];
 document.getElementById("cur").innerHTML=cur_.map(x=>`<button class="flip" aria-pressed="false"><div><span class="f"><i>${x[0]}</i>${x[1]}</span><span class="b">${x[2]}</span></div></button>`).join("");
 document.querySelectorAll(".flip").forEach(b=>b.onclick=()=>{b.setAttribute("aria-pressed",b.getAttribute("aria-pressed")!=="true");sfx.creak()});
@@ -321,38 +284,24 @@ leg.forEach((l,i)=>{const b=document.createElement("button");b.textContent=l[0];
   b.onclick=()=>{[...lt.children].forEach(x=>x.setAttribute("aria-selected",x===b));ver(i);sfx.boo()};lt.appendChild(b)});
 function ver(i){document.getElementById("leg-title").textContent=leg[i][0];document.getElementById("leg-text").textContent=leg[i][1]}ver(0);
 
-/* ===== H. JUEGO 1: LINTERNA DIFÍCIL (criaturas que se mueven, luz que parpadea y se achica) ===== */
-const dark=document.getElementById("dark"),veil=document.getElementById("veil"),cnt=document.getElementById("count");
-const em=["👻","🦇","🕷️","💀","👁️","🎃","🐀","🕸️","🧟"];let found,left,mons,tick,nT,out;
-function endDark(m){clearInterval(tick);cnt.innerHTML=m+' <button>Jugar de nuevo</button>';cnt.querySelector("button").onclick=startDark}
-function startDark(){dark.querySelectorAll(".item").forEach(x=>x.remove());found=0;left=60;nT=0;out=0;
-  mons=em.map(e=>{const b=document.createElement("button"),m={b,x:Math.random()*88,y:Math.random()*84,vx:(Math.random()-.5)*.6,vy:(Math.random()-.5)*.6};
-    b.className="item";b.textContent=e;b.setAttribute("aria-label","Criatura escondida");
-    b.onclick=()=>{if(m.d)return;m.d=1;b.classList.add("found");found++;sfx.boo();if(found==em.length){endDark("¡Los encontraste a todos! Ahora te siguen.")}};dark.prepend(b);return m});
-  clearInterval(tick);tick=setInterval(()=>{nT++;
-    mons.forEach(m=>{if(m.d)return;m.x+=m.vx;m.y+=m.vy;if(m.x<0||m.x>90)m.vx*=-1;if(m.y<0||m.y>88)m.vy*=-1;m.b.style.left=m.x+"%";m.b.style.top=m.y+"%"});
-    const r=Math.max(36,62-(60-left)*.45)*(.88+Math.random()*.12);veil.style.setProperty("--r",(out>0?0:r)+"px");
-    if(out>0)out--;
-    if(nT%20==0){left--;if(Math.random()<.25){out=14;sfx.creak()}cnt.textContent=`Encontrados: ${found} / 9 · Tiempo: ${left} s`;if(left<=0)endDark("Se apagó la última luz. Solo encontraste "+found+" de 9.")}},50);
-  cnt.textContent="Encontrados: 0 / 9 · Tiempo: 60 s"}
+/* ===== H. JUEGO 1: LA LINTERNA ===== */
+const dark=document.getElementById("dark"),veil=document.getElementById("veil");let found=0;
+["👻","🦇","🕷️","💀","👁️","🎃"].forEach((e,i)=>{const b=document.createElement("button");b.className="item";b.textContent=e;b.setAttribute("aria-label","Criatura escondida");
+  b.style.left=8+Math.random()*78+"%";b.style.top=8+Math.random()*76+"%";
+  b.onclick=()=>{if(b.classList.contains("found"))return;b.classList.add("found");found++;document.getElementById("count").textContent=found==6?"¡Los encontraste a todos! Ahora te siguen.":`Encontrados: ${found} / 6`;sfx.boo()};dark.prepend(b)});
 dark.addEventListener("pointermove",e=>{const r=dark.getBoundingClientRect();veil.style.setProperty("--x",e.clientX-r.left+"px");veil.style.setProperty("--y",e.clientY-r.top+"px")});
-startDark();
 
-/* ===== I. CALABAZA ATERRADORA (ojos rojos que siguen al cursor) ===== */
-const eyes=["M40 66L88 84L48 92ZM160 66L112 84L152 92Z","M60 70m-15 0a15 15 0 1 0 30 0a15 15 0 1 0-30 0M140 70m-15 0a15 15 0 1 0 30 0a15 15 0 1 0-30 0","M40 78Q64 56 92 82Q64 72 40 78ZM108 82Q136 56 160 78Q136 72 108 82Z","M38 58L84 62L78 96L44 90ZM118 70L166 54L158 92L122 98Z"];
-const mouths=["M42 108L58 124L70 106L84 130L100 106L116 130L130 106L142 124L158 108L150 150Q100 188 50 150Z","M40 112Q100 190 160 112L146 126L134 112L120 136L106 118L94 118L80 136L66 112L54 126Z","M70 112Q100 100 130 112Q150 150 100 178Q50 150 70 112Z","M44 128L60 118L76 130L92 118L108 130L124 118L140 130L156 120L156 130L140 140L124 130L108 142L92 130L76 142L60 130L44 140Z"];
-let ie=0,im=0,lit=true;const pe=document.getElementById("pk-eyes"),pe2=document.getElementById("pk-eyes2"),pm=document.getElementById("pk-mouth"),pu=document.getElementById("pupils"),sp=document.querySelector("svg.pk");
-function pk(){pe.setAttribute("d",eyes[ie]);pe2.setAttribute("d",eyes[ie]);pm.setAttribute("d",mouths[im]);
-  pe.style.fill=pm.style.fill=lit?"#ffcf5a":"#1a0c04";pu.style.display=lit?"":"none";sp.classList.toggle("lit",lit)}
-document.addEventListener("pointermove",e=>{const r=sp.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2),d=Math.hypot(dx,dy)||1,k=Math.min(8,d/20);pu.setAttribute("transform",`translate(${dx/d*k},${dy/d*k})`)});
-document.getElementById("b-eyes").onclick=()=>{ie=(ie+1)%4;pk();sfx.chirp()};
-document.getElementById("b-mouth").onclick=()=>{im=(im+1)%4;pk();sfx.chirp()};
-document.getElementById("b-light").onclick=()=>{lit=!lit;pk();sfx.boo()};
-document.getElementById("b-scare").onclick=()=>{lit=true;pk();sp.classList.add("scare");sfx.scream();setTimeout(()=>sp.classList.remove("scare"),700)};
-setInterval(()=>{if(lit&&Math.random()<.3){sp.style.opacity=.5;setTimeout(()=>sp.style.opacity=1,90)}},900);pk();
+/* ===== I. JUEGO 2: CALABAZA ===== */
+const eyes=["M45 85L75 85L60 58ZM125 85L155 85L140 58Z","M60 70m-15 0a15 15 0 1 0 30 0a15 15 0 1 0-30 0M140 70m-15 0a15 15 0 1 0 30 0a15 15 0 1 0-30 0","M42 78Q65 52 90 80Q65 68 42 78ZM110 80Q135 52 158 78Q135 68 110 80Z"];
+const mouths=["M50 112L66 130L82 112L100 134L118 112L134 130L150 112L140 152Q100 176 60 152Z","M52 112Q100 178 148 112Q100 138 52 112Z","M66 132L78 118L90 136L100 118L110 136L122 118L134 132L122 152Q100 162 78 152Z"];
+let ie=0,im=0,lit=true;const pe=document.getElementById("pk-eyes"),pm=document.getElementById("pk-mouth");
+function pk(){pe.setAttribute("d",eyes[ie]);pm.setAttribute("d",mouths[im]);pe.style.fill=pm.style.fill=lit?"#ffd27a":"#2b1a08";pe.style.filter=pm.style.filter=lit?"drop-shadow(0 0 6px #ffb347)":"none"}
+document.getElementById("b-eyes").onclick=()=>{ie=(ie+1)%3;pk();sfx.chirp()};
+document.getElementById("b-mouth").onclick=()=>{im=(im+1)%3;pk();sfx.chirp()};
+document.getElementById("b-light").onclick=()=>{lit=!lit;pk();sfx.boo()};pk();
 
 /* ===== J. JUEGO 3: LA VELA ORÁCULO ===== */
-const prof=["La llama dice que sí, pero primero toca a la puerta tres veces.","Una sombra amiga ya viene en camino. No la asustes.","Las respuestas están donde nadie mira: debajo de la cama, quizá.","Ahora no. Los búhos todavía están discutiendo el asunto.","Sí, aunque con rayas. Todo mejora con rayas.","La luna se rio con tu pregunta. Eso es una buena señal.","Cuidado con los espejos después de medianoche: son cotillas.","Sonríe al fantasma de la escalera y te dejará pasar.","Sí, pero antes alimenta al cuervo del tejado.","La araña del rincón ya tejió tu respuesta. Mírala bien.","No lo sé, pero el cementerio entero está apostando que sí.","Espera a que el reloj dé trece campanadas.","Tu futuro huele a calabaza asada y a niebla.","Que no te engañe la luz: lo importante está en la sombra.","Hoy no, mañana tampoco, pero el jueves de la semana que no existe, sí.","Una voz te dirá la respuesta cuando dejes de escuchar.","Sí. Pero lleva una linterna y un amigo que corra más lento que tú.","La llama tiembla: hay alguien detrás de ti. Bromeaba. Quizá.","Entierra la duda al pie del árbol retorcido y mañana habrá una flor negra.","Los murciélagos dicen que no, pero siempre dicen que no.","Sí, con una condición: no mires atrás al cruzar la puerta.","El té de medianoche está servido. Eso significa que sí.","Pregunta de nuevo cuando la luna esté llena y el gato negro esté de buen humor.","Sí, y además te sobrará tiempo para bailar con los esqueletos."];
+const prof=["La llama dice que sí, pero primero toca a la puerta tres veces.","Una sombra amiga ya viene en camino. No la asustes.","Las respuestas están donde nadie mira: debajo de la cama, quizá.","Ahora no. Los búhos todavía están discutiendo el asunto.","Sí, aunque con rayas. Todo mejora con rayas.","La luna se rio con tu pregunta. Eso es una buena señal.","Cuidado con los espejos después de medianoche: son cotillas.","Sonríe al fantasma de la escalera y te dejará pasar."];
 document.getElementById("b-oracle").onclick=()=>{document.getElementById("oracle").textContent=prof[Math.floor(Math.random()*prof.length)];
   const f=document.getElementById("flame");f.animate([{transform:"scale(1)"},{transform:"scale(1.4,.8)"},{transform:"scale(1)"}],{duration:400});f.style.transformOrigin="40px 55px";sfx.bell()};
 </script>
