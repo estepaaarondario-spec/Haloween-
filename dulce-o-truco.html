@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Dulce o truco?</title>
+<link href="https://fonts.googleapis.com/css2?family=Creepster&family=IM+Fell+DW+Pica:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0d0b14;--bone:#e6d8b4;--pumpkin:#e8731a;--violet:#4a3470}
+*{box-sizing:border-box}
+html{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg stroke='%23ebe5d2' stroke-width='1.6' fill='none'%3E%3Cpath d='M16 16L4 6M16 16L2 14M16 16L3 24M16 16L8 29M16 16L28 6M16 16L30 14M16 16L29 24M16 16L24 29'/%3E%3C/g%3E%3Cellipse cx='16' cy='17' rx='5' ry='6' fill='%23ebe5d2'/%3E%3Ccircle cx='16' cy='11' r='3' fill='%23ebe5d2'/%3E%3C/svg%3E") 16 16,auto}
+body{margin:0;min-height:100vh;background:var(--ink);color:var(--bone);font:1.25rem/1.6 "IM Fell DW Pica",Georgia,serif;display:grid;place-items:center;text-align:center;overflow-x:hidden}
+.swirl{position:fixed;inset:-60%;z-index:-1;background:repeating-conic-gradient(#0d0b14 0 9deg,#2a1d45 9deg 18deg);animation:spin 90s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+main{padding:2rem 1rem;max-width:620px}
+h1{font:400 clamp(3rem,12vw,6rem)/1 Creepster,fantasy;color:var(--bone);text-shadow:4px 4px 0 var(--violet);margin:0 0 .5rem}
+.warn{border:3px dashed var(--pumpkin);padding:.6rem 1rem;background:#0d0b14e6}
+.door{width:200px;height:260px;margin:1.6rem auto;border-radius:100px 100px 0 0;border:8px solid var(--bone);background:repeating-linear-gradient(90deg,#2b1a10 0 22px,#1c110a 22px 44px);position:relative;box-shadow:0 0 40px #e8731a55}
+.door::after{content:"🎃";position:absolute;left:50%;top:48%;transform:translateX(-50%);font-size:3rem}
+.row{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap}
+button,.back{font:1.8rem Creepster,fantasy;letter-spacing:.06em;border:0;padding:.5rem 1.8rem;transform:rotate(-2deg);box-shadow:5px 5px 0 var(--violet);color:var(--ink);text-decoration:none;display:inline-block}
+#dulce{background:var(--pumpkin)}#truco{background:#9bd1c4;transform:rotate(2deg)}
+button:hover,button:focus-visible{outline:3px solid var(--bone)}
+.cover{position:fixed;inset:0;z-index:99;background:#000;display:grid;place-items:center;text-align:center}
+[hidden]{display:none!important}
+#scare svg{width:min(95vmin,700px);animation:zoom .25s ease-out forwards,shake .06s .25s 14}
+#scare{animation:red .35s}
+#scare p{position:absolute;bottom:8%;font:1.6rem "IM Fell DW Pica",serif;color:var(--bone)}
+@keyframes zoom{from{transform:scale(.05)}to{transform:scale(1.15)}}
+@keyframes shake{0%,100%{translate:0}50%{translate:8px -6px}}
+@keyframes red{0%{background:#c00}100%{background:#000}}
+#lock h2{font:400 clamp(3rem,12vw,6rem) Creepster,fantasy;color:#c33;text-shadow:0 0 25px #c33;margin:0}
+#lock p{max-width:30ch}
+.eye{position:absolute;width:44px;height:14px;background:radial-gradient(circle,#ff3 0 30%,transparent 35%) 0 50%/22px 14px repeat-x;animation:blink 3s infinite}
+@keyframes blink{0%,45%,55%,100%{opacity:1}50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="swirl"></div>
+<main id="main">
+  <h1>¿Dulce o truco?</h1>
+  <p class="warn">Aviso: esta página tiene un susto con sonido fuerte y un truco que bloquea la página. Subí el volumen bajo tu propio riesgo.</p>
+  <div class="door" aria-hidden="true"></div>
+  <p>Alguien toca la puerta y espera. Elegí con cuidado.</p>
+  <div class="row"><button id="dulce">Dulce</button><button id="truco">Truco</button></div>
+  <p><a href="index.html" style="color:var(--bone)">Volver a la colina</a></p>
+</main>
+
+<!-- SUSTO (si elegís dulce) -->
+<div id="scare" class="cover" hidden>
+  <svg viewBox="0 0 200 200" role="img" aria-label="Rostro espantoso">
+    <ellipse cx="100" cy="102" rx="70" ry="88" fill="#e6dcc0"/>
+    <path d="M60 40Q70 90 52 130M142 38Q132 80 150 120" stroke="#8a7d5c" stroke-width="2" fill="none"/>
+    <ellipse cx="68" cy="84" rx="22" ry="28" fill="#000"/><ellipse cx="132" cy="84" rx="22" ry="28" fill="#000"/>
+    <circle cx="70" cy="88" r="5" fill="#f22"/><circle cx="130" cy="88" r="5" fill="#f22"/>
+    <path d="M94 112L100 128L106 112Z" fill="#000"/>
+    <path d="M50 140Q100 130 150 140Q160 190 100 198Q40 190 50 140Z" fill="#150000"/>
+    <path d="M58 142L64 162L72 142L80 166L90 142L100 168L110 142L120 166L128 142L136 162L142 142Z" fill="#fff"/>
+  </svg>
+  <p id="after" hidden>Eran dulces de ojos de verdad… <a class="back" href="index.html">Volver</a></p>
+</div>
+
+<!-- BLOQUEO (si elegís truco) -->
+<div id="lock" class="cover" hidden>
+  <div><h2>¡Truco!</h2><p>La página quedó embrujada y ya no puedes tocar nada. Para escapar, recarga la página (F5).</p></div>
+</div>
+
+<script>
+let AC;const ac=()=>AC||(AC=new (window.AudioContext||window.webkitAudioContext)());
+function tone(f,t,type,v,f2,delay=0){const a=ac(),o=a.createOscillator(),g=a.createGain(),n=a.currentTime+delay;
+  o.type=type;o.frequency.setValueAtTime(f,n);if(f2)o.frequency.exponentialRampToValueAtTime(f2,n+t);
+  g.gain.setValueAtTime(v,n);g.gain.exponentialRampToValueAtTime(.0001,n+t);o.connect(g).connect(a.destination);o.start(n);o.stop(n+t)}
+function scream(){const a=ac(),len=a.sampleRate*1.6,b=a.createBuffer(1,len,a.sampleRate),d=b.getChannelData(0);
+  for(let i=0;i<len;i++)d[i]=(Math.random()*2-1)*(1-i/len);
+  const s=a.createBufferSource(),f=a.createBiquadFilter(),g=a.createGain();s.buffer=b;f.type="bandpass";f.Q.value=3;
+  f.frequency.setValueAtTime(800,a.currentTime);f.frequency.exponentialRampToValueAtTime(3200,a.currentTime+.6);g.gain.value=.5;
+  s.connect(f).connect(g).connect(a.destination);s.start();
+  tone(880,1.5,"sawtooth",.22,1400);tone(932,1.5,"sawtooth",.22,1480);tone(110,1.2,"square",.2,60)}
+function laugh(){for(let i=0;i<7;i++)tone(300-i*18,.2,"sawtooth",.08,180-i*10,i*.28)}
+
+document.getElementById("dulce").onclick=()=>{
+  document.getElementById("scare").hidden=false;scream();
+  setTimeout(()=>document.getElementById("after").hidden=false,3000)};
+
+document.getElementById("truco").onclick=()=>{
+  const lock=document.getElementById("lock");lock.hidden=false;document.body.style.overflow="hidden";
+  document.getElementById("main").inert=true;laugh();
+  for(let i=0;i<14;i++){const e=document.createElement("span");e.className="eye";e.style.left=Math.random()*94+"%";e.style.top=Math.random()*94+"%";e.style.animationDelay=Math.random()*3+"s";lock.appendChild(e)}
+  // Bloqueo: se anulan clic derecho y teclas, salvo recargar (F5 o Ctrl/Cmd+R)
+  addEventListener("contextmenu",e=>e.preventDefault());
+  addEventListener("keydown",e=>{const rec=e.key==="F5"||((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="r");if(!rec)e.preventDefault()},true);
+  lock.focus()};
+</script>
+</body>
+</html>
